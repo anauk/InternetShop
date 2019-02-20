@@ -3,8 +3,10 @@ package commodity;
 public class OneOrder {
     //номер заказа
     private int idOrder;
+    //номер товара
+    private int productId;
     //товар
-    private Commodity product;
+    private String productName;
     //количество товара
     private int quantity;
     // цена товара
@@ -12,20 +14,37 @@ public class OneOrder {
     //цена всех товаров в корзине
     private int totalPrice;
 
+    public OneOrder(int idOrder, int productId, String productName, int quantity, int price, int totalPrice) {
+        this.idOrder = idOrder;
+        this.productId = productId;
+        this.productName = productName;
+        this.quantity = quantity;
+        this.price = price;
+        this.totalPrice = totalPrice;
+    }
+
     public int getIdOrder() {
         return idOrder;
+    }
+
+    public int getProductId() {
+        return productId;
+    }
+
+    public void setProductId(int productId) {
+        this.productId = productId;
     }
 
     public void setIdOrder(int idOrder) {
         this.idOrder = idOrder;
     }
 
-    public Commodity getProduct() {
-        return product;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setProduct(Commodity product) {
-        this.product = product;
+    public void setProductName(String product) {
+        this.productName = product;
     }
 
     public int getQuantity() {
@@ -50,5 +69,9 @@ public class OneOrder {
 
     public void setTotalPrice(int totalPrice) {
         this.totalPrice = totalPrice;
+    }
+    @Override
+    public String toString() {
+        return String.format("ID: %d |ProductID: %d | Rroduct: %s | Quantity: %d| Price: %d | totalPrice: %d", this.idOrder, this.productId, this.productName,this.quantity,this.price,this.totalPrice);
     }
 }
