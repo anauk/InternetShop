@@ -1,5 +1,7 @@
 package servlets;
 
+import freemarker.Freemarker;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +12,12 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class LogOutServlet extends HttpServlet {
+    private final Freemarker template;
+
+    public LogOutServlet(Freemarker template) {
+        this.template = template;
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Files.copy(Paths.get("login.html"), resp.getOutputStream());
@@ -27,6 +35,6 @@ public class LogOutServlet extends HttpServlet {
                 }
             }
 
-        resp.sendRedirect("/list");
+        template.render("injectionProductUnknown.ftl",resp);
     }
 }

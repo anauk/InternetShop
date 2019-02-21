@@ -1,7 +1,7 @@
 package servlets;
 
-import user.DaoUserSQL;
-import user.User;
+import shopping.sql.DaoUserSQL;
+import shopping.entity.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -37,6 +37,6 @@ public class AuthServlet extends HttpServlet {
         new DaoUserSQL(conn).put(user);
         resp.addCookie(new Cookie("uname", login));
 
-        resp.sendRedirect("/list");
+        resp.sendRedirect("/listauth");
     }
 }

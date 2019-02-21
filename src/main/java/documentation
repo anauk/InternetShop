@@ -1,0 +1,32 @@
+Create table Postgres
+
+create table if not exists commodities
+(
+	id serial not null
+		constraint commodities_pk
+			primary key,
+	name varchar(20),
+	price integer,
+	quantity integer
+);
+
+create table if not exists cardorder
+(
+	id_order serial not null
+		constraint cardorder_pk
+			primary key,
+	id_user integer,
+	commodity_id integer,
+	quantity integer
+);
+
+create table users
+(
+  id       serial not null
+    constraint users_pk
+      primary key,
+  name     varchar(20),
+  surname  varchar(20),
+  login    varchar(20),
+  password varchar(20)
+);

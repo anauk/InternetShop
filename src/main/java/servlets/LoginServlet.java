@@ -1,10 +1,8 @@
 package servlets;
 
-import servlets.ParameterFromRequest;
-import user.User;
+import shopping.dao.UserStorage;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,6 +11,13 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class LoginServlet extends HttpServlet {
+    public static String f_lg ="login";
+    public static String f_pw = "password";
+    private final UserStorage us;
+
+    public LoginServlet(UserStorage us) {
+        this.us = us;
+    }
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Files.copy(Paths.get("login.html"), resp.getOutputStream());
@@ -24,8 +29,8 @@ public class LoginServlet extends HttpServlet {
         String login = pfr.getStr("login");
         String password = pfr.getStr("password");
 
-        resp.addCookie(new Cookie("uname", login));
-
+        us.register(login, password);
+        System.out.println(req.getParameterMap());
 
         resp.sendRedirect("/list");
     }

@@ -1,11 +1,6 @@
 package database;
 
-import commodity.Commodity;
-
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public class DbConnection {
     private String path = "jdbc:postgresql://localhost:5432/fs7";

@@ -1,7 +1,6 @@
 package servlets;
 
-import commodity.DaoCard;
-import commodity.Order;
+import other.commoddity.DaoCard;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
