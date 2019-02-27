@@ -19,7 +19,7 @@ public class DaoCommoditySQL implements DAO<Commodity> {
     @Override
     public Commodity get(int id) {
         try {
-            PreparedStatement ps = connection.prepareStatement("select * from public.commodities where id = ?");
+            PreparedStatement ps = connection.prepareStatement("select * from public.commodity where id = ?");
             ps.setInt(1, id);
             ResultSet resultSet = ps.executeQuery();
             if (resultSet.next()) {
@@ -40,11 +40,10 @@ public class DaoCommoditySQL implements DAO<Commodity> {
     @Override
     public void put(Commodity com) {
         try {
-            PreparedStatement ps = connection.prepareStatement("insert into fs7.public.commodities(id,name,price,quantity) values (?,?,?,?)");
+            PreparedStatement ps = connection.prepareStatement("insert into fs7.public.commodity(id,name,price) values (?,?,?)");
             ps.setInt(1, com.getId());
             ps.setString(2, com.getName());
             ps.setInt(3, com.getPrice());
-            ps.setInt(4, com.getQuantity());
             ps.execute();
         } catch (SQLException e) {
             throw new IllegalArgumentException("Something wrong", e);
@@ -55,7 +54,7 @@ public class DaoCommoditySQL implements DAO<Commodity> {
     public Collection<Commodity> all() {
         try (Statement statement = connection.createStatement()) {
             List<Commodity> products = new ArrayList<>();
-            ResultSet rs = statement.executeQuery("select * from fs7.public.commodities");
+            ResultSet rs = statement.executeQuery("select * from fs7.public.commodity");
             while (rs.next()) {
                 products.add(new Commodity(rs.getInt("id"),
                         rs.getString("name"),
@@ -70,7 +69,7 @@ public class DaoCommoditySQL implements DAO<Commodity> {
     }
     @Override
     public void delete(int id) {
-        try (PreparedStatement ps = connection.prepareStatement("delete from fs7.public.commodities where id = ?")) {
+        try (PreparedStatement ps = connection.prepareStatement("delete from fs7.public.commodity where id = ?")) {
             ps.setInt(1, id);
             ps.execute();
         } catch (SQLException e) {

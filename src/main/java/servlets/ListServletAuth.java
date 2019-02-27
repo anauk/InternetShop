@@ -30,4 +30,15 @@ public class ListServletAuth extends HttpServlet {
 
         fm.render("injectionProduct.ftl", products, resp);
     }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        ParameterFromRequest pfr = new ParameterFromRequest(req);
+        String action = pfr.getStr("add");
+        //хочу остаться в списке товаров
+        if(action.equalsIgnoreCase("add")) {
+            // сделать добавление в корзину
+            resp.sendRedirect("/listauth");
+        }
+    }
 }

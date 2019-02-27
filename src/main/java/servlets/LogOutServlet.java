@@ -12,6 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class LogOutServlet extends HttpServlet {
+    private final String COOKIE_NAME = "shop_cookie";
     private final Freemarker template;
 
     public LogOutServlet(Freemarker template) {
@@ -30,11 +31,11 @@ public class LogOutServlet extends HttpServlet {
             for (Cookie cookie:cookies) {
                 if(cookie.getName().equals("login")) {
                     cookie.setMaxAge(0);
-                    cookie.setPath("/");
+                    cookie.setPath("/*");
                     resp.addCookie(cookie);
+                    System.out.println("ok");
                 }
             }
-
         template.render("injectionProductUnknown.ftl",resp);
     }
 }

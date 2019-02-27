@@ -13,7 +13,7 @@ public class AppOrder {
     public static void main1(String[] args) throws CardOrderNotFoundException {
         Connection conn = new DbConnection().connection();
         DAO<OneOrder> daoDB = new DaoOneOrderSQL(conn);
-        //
+
         DAO<OneOrder> dao11 = DaoFabricOrder.buildInDatabase();
         OneOrder o1 = new OneOrder(1, 1, "Coca-cole", 2, 5, 10);
         System.out.println(o1);
@@ -26,9 +26,9 @@ public class AppOrder {
         Connection conn = new DbConnection().connection();
         DaoCartItemSQL dao = new DaoCartItemSQL(conn);
         // add other.commodity 5 to user 3 10pcs
-        CartItem order1 = new CartItem(7, 140, 9);
-        CartItem order2 = new CartItem(3, 132, 9);
-        CartItem order3 = new CartItem(1, 140, 9);
+        CartItem order1 = new CartItem(7, 156, 23);
+        CartItem order2 = new CartItem(3, 157, 19);
+        CartItem order3 = new CartItem(1, 158, 33);
         dao.put(order1);
         dao.put(order2);
         dao.put(order3);

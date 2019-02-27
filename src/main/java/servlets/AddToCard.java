@@ -17,5 +17,6 @@ public class AddToCard extends HttpServlet {
         ParameterFromRequest pfr = new ParameterFromRequest(req);
         String action = pfr.getStr("add");
         //хочу остаться в списке товаров
+        resp.sendRedirect("/product");
     }
 }

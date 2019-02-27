@@ -8,8 +8,14 @@ body {
     padding: 15px;
     margin: auto;
 }
+.title{
+    padding: 20px 20px;
+    color: dimgrey;
+    font-palette: light;
+}
 .container{
-
+margin: 0 auto;
+    margin: 10px 10px;
 }
 .button {
     color: red;
@@ -34,4 +40,35 @@ body {
 }
 .form-signin .form-control:focus {
     z-index: 2;
+}
+.header {
+    text-align: center;
+}
+.flex-container {
+    display: flex;
+    flex-direction: row ;
+    align-content: center;
+}
+.flex-item {
+    background: antiquewhite;
+   width: 20%;
+margin: 5px 5px;
+    padding: 10px 10px;
+}
+.flex-item1 {
+    margin: 10px 10px;
+    width: 33%;
+}
+.shopping{
+    text-transform: lowercase;
+    border: 1px solid darkgray;
+    text-align: center;
+    padding: 5px 5px;
+    background: gainsboro;
+}
+.color-button{
+    background: rosybrown;
+    padding: 10px 10px;
+    border-radius: 5px;
+
 }

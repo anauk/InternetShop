@@ -15,4 +15,5 @@ public class ParameterFromRequest {
         return req.getParameter(input);
     }
 
+
 }

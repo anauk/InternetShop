@@ -20,13 +20,7 @@ public class Params {
     public Params(Map<String, String[]> params) {
         this.params = params;
     }
-    public boolean containsAll(String... keys) {
-        boolean result = true;
-        for (String s : keys) {
-            result = result && containsKey(s) && containsValue(s);
-        }
-        return result;
-    }
+
     public boolean containsKey(String key) {
         return params.containsKey(key);
     }
@@ -35,6 +29,19 @@ public class Params {
         String[] ss = params.get(key);
         return (ss.length>0) && (!ss[0].isEmpty());
     }
+
+    public boolean containsAll(String... keys) {
+        boolean result = true;
+        for (String s : keys) {
+            result = result && containsKey(s) && containsValue(s);
+        }
+        return result;
+    }
+
+    public String get(String key) {
+        return params.get(key)[0];
+    }
+
 
     @Override
     public String toString() {

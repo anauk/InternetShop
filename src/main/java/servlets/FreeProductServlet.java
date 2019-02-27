@@ -30,4 +30,5 @@ public class FreeProductServlet extends HttpServlet {
 
         template.render("injectionProduct.ftl", products, resp);
     }
+
 }

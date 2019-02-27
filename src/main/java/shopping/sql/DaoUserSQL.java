@@ -7,6 +7,7 @@ import shopping.exception.UserNotFoundException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class DaoUserSQL implements DAO<User> {
@@ -72,6 +73,21 @@ public class DaoUserSQL implements DAO<User> {
             throw new IllegalArgumentException("smth wrong", e);
         }
     }
+    public int getId(String login, String password){
+        try {
+            PreparedStatement ps = conn.prepareStatement("select * from public.users where (login, password) = (?,?)");
+            ps.setString(1, login);
+            ps.setString(2, password);
+            ResultSet resultSet = ps.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt("id");
+            } else {
+                throw new UserNotFoundException("Such user is emty!");
+            }
+        } catch (SQLException e) {
+            throw new IllegalArgumentException("smth with method detId user wrong", e);
+        }
+    }
 
     @Override
     public void put(User end) {
@@ -86,5 +102,6 @@ public class DaoUserSQL implements DAO<User> {
             throw new IllegalArgumentException("smth went wrong", e);
         }
     }
+
 
 }

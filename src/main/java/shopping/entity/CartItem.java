@@ -1,10 +1,10 @@
 package shopping.entity;
 
 public class CartItem {
-    private int id;
-    private  int user_id;
-    private int commodity_id;
-    private int quantity;
+    protected int id;
+    protected int user_id;
+    protected int commodity_id;
+    protected int quantity;
 
     public CartItem(int user_id, int commodity_id, int quantity) {
         this.id = -1;

@@ -13,8 +13,8 @@ import java.sql.Connection;
 
 public class AppUser {
     public static void main(String[] args) {
-        Connection conn = new DbConnection().connection();
-        DAO<User> dao1 = new DaoUserHashMap();
+       Connection conn = new DbConnection().connection();
+         /*DAO<User> dao1 = new DaoUserHashMap();
         DAO<User> dao2 = new DaoUserSQL(conn);
         //
         DAO<User> dao11 = DaoFabric.buildInMemory();
@@ -35,7 +35,7 @@ public class AppUser {
         User user1 = dao1.get(1);
         System.out.println(user1);
         User user2 = dao2.get(1);
-        System.out.println(user2);
+        System.out.println(user2);*/
         DAO<Commodity> dBc = new DaoCommoditySQL(conn);
         dBc.put(new Commodity(152,"Viski", 45, 32));
         dBc.put(new Commodity(153,"Regata", 35, 29));
