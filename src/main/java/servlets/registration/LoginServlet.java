@@ -19,7 +19,7 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Files.copy(Paths.get("login.html"), resp.getOutputStream());
+        Files.copy(Paths.get("templ/login.html"), resp.getOutputStream());
     }
 
     @Override

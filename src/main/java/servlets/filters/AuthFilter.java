@@ -1,4 +1,4 @@
-package servlets.registration;
+package servlets.filters;
 
 
 import javax.servlet.*;

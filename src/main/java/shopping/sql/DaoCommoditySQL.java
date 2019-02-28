@@ -79,6 +79,20 @@ public class DaoCommoditySQL implements DAO<Commodity> {
 
     @Override
     public boolean isEmpty() {
-        return false;
+        int count = 0;
+        try {
+            Statement stmt = connection.createStatement();
+            String query = "select count(*) from fs7.public.commodity";
+            ResultSet resultSet = stmt.executeQuery(query);
+            while(resultSet.next()){
+                count = resultSet.getInt("COUNT(*)");
+            }
+            resultSet.close();
+        } catch (SQLException e) {
+            throw new IllegalArgumentException("smth went wrong", e);
+        }
+        return count == 0;
     }
+
 }
+

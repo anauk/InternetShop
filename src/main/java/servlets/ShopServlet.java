@@ -38,32 +38,17 @@ public class ShopServlet extends HttpServlet {
         }
         f.render("listCom.ftl", data, resp);
 
-        //Files.copy(Paths.get("listCom.ftl"), resp.getOutputStream());
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        /*DaoCard order = new DaoCard();
+
         ParameterFromRequest pfr = new ParameterFromRequest(req);
-        String action = pfr.getStr("action");
-        int id = pfr.getInt("id");
-        String name = pfr.getStr("name");
-        int price = pfr.getInt("price");
-        int quantity = 1;
-        //добавить или удалить товар
-        if ((action!=null)&&(id != 0)){
-            if("add".equals(action)){
-                order.addToCard(id, name,price,quantity);
-            } else if("remove".equals(action)){
-                order.addToCard(id, name, price, quantity);
-            }
-        }*/
-        ParameterFromRequest pfr = new ParameterFromRequest(req);
-        int item_id = pfr.getInt("item_id");
+        int commodityId = pfr.getInt("id");
 
         try {
-            int user_id = Integer.parseInt(cm.getValue(req));
-            cardService.putChecked(user_id, item_id);
+            int userId = Integer.parseInt(cm.getValue(req));
+            cardService.putChecked(userId, commodityId);
 
         } catch (CookieUnavailableException | NumberFormatException e) {
             resp.getWriter().printf("<html> <a href=\"/shop\"> You have made a request in illegal way! %n %s </a></html>", e.getMessage());

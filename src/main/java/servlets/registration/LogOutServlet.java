@@ -19,6 +19,6 @@ public class LogOutServlet extends HttpServlet {
         Cookie cookie = new Cookie(COOKIES_NAME,"");
         cookie.setMaxAge(0);
         resp.addCookie(cookie);
-        resp.sendRedirect("/list");
+        resp.sendRedirect("/shop");
     }
 }

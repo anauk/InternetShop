@@ -1,4 +1,5 @@
 package shopping.sql;
+
 import shopping.entity.CartInfo;
 import shopping.exception.CardOrderNotFoundException;
 import shopping.entity.CartItem;
@@ -21,12 +22,12 @@ public class DaoCartItemSQL implements DAO<CartItem> {
     @Override
     public CartItem get(int id) throws CardOrderNotFoundException {
         try {
-            PreparedStatement ps = conn.prepareStatement("select id_order, id_user, commodity_id, quantity from cardorder WHERE id_order = ?");
+            PreparedStatement ps = conn.prepareStatement("select id, id_user, commodity_id, quantity from cardorder WHERE id = ?");
             ps.setInt(1, id);
             ResultSet resultSet = ps.executeQuery();
             if (resultSet.next()) {
                 return new CartItem(
-                        resultSet.getInt("id_order"),
+                        resultSet.getInt("id"),
                         resultSet.getInt("id_user"),
                         resultSet.getInt("commodity_id"),
                         resultSet.getInt("quantity")
@@ -58,13 +59,13 @@ public class DaoCartItemSQL implements DAO<CartItem> {
             List<CartItem> orders = new ArrayList<>();
             ResultSet rs = statement.executeQuery("select id, id_user, commodity_id, quantity from fs7.public.cardorder");
             while (rs.next()) {
-                int id= rs.getInt("id");
-                 int user_id = rs.getInt("id_user");
-                        int com_id = rs.getInt("commodity_id");
-                        int qu = rs.getInt("quantity");
+                int id = rs.getInt("id");
+                int user_id = rs.getInt("id_user");
+                int com_id = rs.getInt("commodity_id");
+                int qu = rs.getInt("quantity");
                 CartItem cartItem = new CartItem(id, user_id, com_id, qu);
                 orders.add(cartItem);
-                System.out.printf("%d : %d : %d : %d\n", id,user_id,com_id, qu);
+                System.out.printf("%d : %d : %d : %d\n", id, user_id, com_id, qu);
             }
 
             return orders;
@@ -78,7 +79,7 @@ public class DaoCartItemSQL implements DAO<CartItem> {
     @Override
     public void delete(int id) throws CardOrderNotFoundException {
         try {
-            PreparedStatement ps = conn.prepareStatement("DELETE FROM cardorder WHERE id_order=?");
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM cardorder WHERE id=?");
             //get(id);
             ps.setInt(1, id);
             ps.execute();
@@ -89,7 +90,19 @@ public class DaoCartItemSQL implements DAO<CartItem> {
 
     @Override
     public boolean isEmpty() {
-        return false;
+        int count = 0;
+        try (Statement stmt = conn.createStatement()) {
+            String query = "select count(*) from fs7.public.cardorder";
+            ResultSet resultSet = stmt.executeQuery(query);
+            while (resultSet.next()) {
+                count = resultSet.getInt("COUNT(*)");
+            }
+            resultSet.close();
+        } catch (SQLException e) {
+            throw new IllegalArgumentException("smth went wrong", e);
+        }
+        return count == 0;
+
     }
 
     public Collection<CartInfo> getByUser(int user_id) {
@@ -98,8 +111,8 @@ public class DaoCartItemSQL implements DAO<CartItem> {
             PreparedStatement ps = conn.prepareStatement(
                     "select * from cardorder"
                             + " join commodity on commodity.id=cardorder.commodity_id"
-                    // + " join users on cardorder.id_user=users.id"
-                    + " WHERE id_user = ?");
+                            // + " join users on cardorder.id_user=users.id"
+                            + " WHERE id_user = ?");
             ps.setInt(1, user_id);
             ResultSet resultSet = ps.executeQuery();
             while (resultSet.next()) {
@@ -118,8 +131,12 @@ public class DaoCartItemSQL implements DAO<CartItem> {
         }
         return cartInfo;
     }
-    public void setQuantity(int quantity, int id) {
-        try{
+
+    public void setQuantity(int quantity, int id) throws IllegalArgumentException {
+        if (quantity < 1) {
+            throw new IllegalArgumentException("Quantity must be 1 or more");
+        }
+        try {
             PreparedStatement ps = conn.prepareStatement("UPDATE cardorder SET quantity = ? WHERE commodity_id = ?");
             ps.setInt(1, quantity);
             ps.setInt(2, id);
@@ -129,8 +146,8 @@ public class DaoCartItemSQL implements DAO<CartItem> {
         }
     }
 
-    public void incQuantity(int id) {
-        try{
+    public void incQuantity(int id) throws IllegalArgumentException {
+        try {
             PreparedStatement ps = conn.prepareStatement("UPDATE cardorder SET quantity = quantity+1 WHERE commodity_id = ?");
             ps.setInt(1, id);
             ps.executeQuery();
@@ -139,13 +156,13 @@ public class DaoCartItemSQL implements DAO<CartItem> {
         }
     }
 
-    public void decQuantity(int id) {
-        try{
-            if(get(id).getQuantity() >1){
-            PreparedStatement ps = conn.prepareStatement("UPDATE cardorder SET quantity = quantity-1 WHERE commodity_id = ?");
-            ps.setInt(1, id);
-            ps.executeQuery();
-            } else if(get(id).getQuantity()==1){
+    public void decQuantity(int id) throws IllegalArgumentException {
+        try {
+            if (get(id).getQuantity() > 1) {
+                PreparedStatement ps = conn.prepareStatement("UPDATE cardorder SET quantity = quantity-1 WHERE commodity_id = ?");
+                ps.setInt(1, id);
+                ps.executeQuery();
+            } else if (get(id).getQuantity() == 1) {
                 delete(id);
             }
         } catch (SQLException e) {

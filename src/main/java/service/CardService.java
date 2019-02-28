@@ -28,17 +28,17 @@ public class CardService {
     public boolean isEmpty(){
         return cards.isEmpty();
     }
-    public void putChecked(int userId, int commodityyId) {
+    public void putChecked(int userId, int commodityId) {
 
         final int[] id = {0};
 
         cards.getByUser(userId).stream()
-                .filter(ci -> ci.getCommodity_id() == commodityyId)
+                .filter(ci -> ci.getCommodity_id() == commodityId)
                 .findFirst()
                 .ifPresent(ci -> id[0] = ci.getId());
 
         if (id[0] == 0){
-            cards.put(new CartItem(userId, commodityyId, 1));
+            cards.put(new CartItem(userId, commodityId, 1));
         }
         else {
             cards.incQuantity(id[0]);

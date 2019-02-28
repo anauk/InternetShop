@@ -3,15 +3,16 @@ package shopping.entity;
 public class CartInfo extends CartItem {
     private String pname;
     private int price;
+
     public CartInfo(int user_id, int commodity_id, String name, int quantity) {
         super(user_id, commodity_id, quantity);
-        this.pname=name;
+        this.pname = name;
     }
 
     public CartInfo(int id, int user_id, int commodity_id, String name, int quantity, int price) {
         super(id, user_id, commodity_id, quantity);
         this.price = price;
-        this.pname=name;
+        this.pname = name;
     }
 
 

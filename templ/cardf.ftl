@@ -12,7 +12,7 @@
 <body>
 
 <div action="/auth" method="post" total="">
-    <a href="/logout" >Log out</a>
+    <a href="/logout" >LogOut</a>
 
 <div id="header">
     <h2 class="header">You (${name}) added good in card</h2>
@@ -39,7 +39,7 @@
 
                     <form class="flex-item" <#--action="/cardOp"--> action="/cardf" method = "post">
                             <input type="hidden" value="${listItem.id}" name="id">
-                        <input type="hidden" value="sum" name="action">
+                        <input type="hidden" value="add" name="action">
                             <button <#--op="sum"--> type="submit">ADD</button>
                         </form>
                     <form class="flex-item" <#--action="/cardOp"-->action="/cardf" method = "post">
@@ -58,9 +58,9 @@
 
     </div>
     <div class="flex-container">
-<span class="flex-item1 shopping"><a href="/listauth">Continue shopping</a></span>
-        <span class="flex-item1">Total:</span><span>${summ}</span>
-        <span class="flex-item1">${qntSum}</span>
+<span class="flex-item1 shopping"><a href="/shop">Continue shopping</a></span>
+        <span class="flex-item1">Total: ${summ}</span>
+        <span class="flex-item1">Quantity: ${qntSum}</span>
 <span class="flex-item1">
     <form action="" method="get">
         <button class="color-button" type="submit">CHECKOUT</button>
