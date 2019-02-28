@@ -66,4 +66,9 @@ public class DaoOneOrderSQL implements DAO<OneOrder> {
     public void delete(int id) {
 
     }
+
+    @Override
+    public boolean isEmpty() {
+        return false;
+    }
 }

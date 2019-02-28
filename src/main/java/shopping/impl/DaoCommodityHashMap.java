@@ -29,5 +29,10 @@ public class DaoCommodityHashMap implements DAO<Commodity> {
         storage.remove(id);
     }
 
+    @Override
+    public boolean isEmpty() {
+        return false;
+    }
+
 
 }

@@ -21,7 +21,7 @@ public class DaoUserSQL implements DAO<User> {
         List<User> list = new ArrayList<>();
         try {
             Statement stmt = conn.createStatement();
-            ResultSet resultSet = stmt.executeQuery("select * from public.users");
+            ResultSet resultSet = stmt.executeQuery("select * from fs7.public.users");
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String name = resultSet.getString("name");
@@ -52,14 +52,30 @@ public class DaoUserSQL implements DAO<User> {
     }
 
     @Override
+    public boolean isEmpty() {
+        int count = 0;
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet resultSet = stmt.executeQuery("select count (*) from fs7.public.users ");
+        while(resultSet.next()){
+            count = resultSet.getInt("count(*)");
+        }
+        //resultSet.close();
+        } catch (SQLException e) {
+            throw new IllegalArgumentException("smth wrong", e);
+        }
+        System.out.println(count);
+        return count == 0;
+    }
+
+    @Override
     public User get(int id) {
         try {
-            PreparedStatement ps = conn.prepareStatement("select * from public.users where id = ?");
+            PreparedStatement ps = conn.prepareStatement("select * from fs7.public.users where id = ?");
             ps.setInt(1, id);
             ResultSet resultSet = ps.executeQuery();
             if (resultSet.next()) {
                 return new User(
-                        resultSet.getInt("id"),
                         resultSet.getString("name"),
                         resultSet.getString("surname"),
                         resultSet.getString("login"),
@@ -73,9 +89,9 @@ public class DaoUserSQL implements DAO<User> {
             throw new IllegalArgumentException("smth wrong", e);
         }
     }
-    public int getId(String login, String password){
+    /*public int get(String login, String password){
         try {
-            PreparedStatement ps = conn.prepareStatement("select * from public.users where (login, password) = (?,?)");
+            PreparedStatement ps = conn.prepareStatement("select * from fs7.public.users where (login, password) = (?,?)");
             ps.setString(1, login);
             ps.setString(2, password);
             ResultSet resultSet = ps.executeQuery();
@@ -87,16 +103,17 @@ public class DaoUserSQL implements DAO<User> {
         } catch (SQLException e) {
             throw new IllegalArgumentException("smth with method detId user wrong", e);
         }
-    }
+    }*/
 
     @Override
     public void put(User end) {
         try {
-            PreparedStatement ps = conn.prepareStatement("insert into users(name,surname,login,password) values (?,?,?,?)");
+            PreparedStatement ps = conn.prepareStatement("insert into users(name,surname,login,password,id) values (?,?,?,?,?)");
             ps.setString(1, end.getName());
             ps.setString(2, end.getSurname());
             ps.setString(3, end.getLogin());
             ps.setString(4, end.getPassword());
+            ps.setInt(5, end.getId());
             ps.execute();
         } catch (SQLException e) {
             throw new IllegalArgumentException("smth went wrong", e);

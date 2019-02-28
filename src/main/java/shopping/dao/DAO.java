@@ -8,4 +8,5 @@ public interface DAO<T> {
     Collection<T> all();
     void delete(int id);
 
+    boolean isEmpty();
 }

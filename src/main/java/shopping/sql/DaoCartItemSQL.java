@@ -87,6 +87,11 @@ public class DaoCartItemSQL implements DAO<CartItem> {
         }
     }
 
+    @Override
+    public boolean isEmpty() {
+        return false;
+    }
+
     public Collection<CartInfo> getByUser(int user_id) {
         ArrayList<CartInfo> cartInfo = new ArrayList<>();
         try {

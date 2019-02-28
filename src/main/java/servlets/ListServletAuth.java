@@ -3,6 +3,7 @@ package servlets;
 import shopping.entity.Commodity;
 import shopping.sql.DaoCommoditySQL;
 import freemarker.Freemarker;
+import utils.ParameterFromRequest;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

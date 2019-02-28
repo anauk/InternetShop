@@ -1,4 +1,4 @@
-package servlets;
+package servlets.registration;
 
 import org.eclipse.jetty.http.HttpMethod;
 
@@ -23,13 +23,13 @@ public class LoginFilter implements Filter {
             throw new IllegalArgumentException("ServletRequest should be instance of HttpServletRequest");
         }
 
-        if (HttpMethod.POST.name().equals(req.getMethod()) &&
+       /* if (HttpMethod.POST.name().equals(req.getMethod()) &&
                 !new Params(req).containsAll(LoginServlet.f_lg, LoginServlet.f_pw)) {
             ((HttpServletResponse)servletResponse).sendRedirect("/reg");
             } else {
             filterChain.doFilter(servletRequest, servletResponse);
                 //servletResponse.getWriter().print("Your login or password wrong");
-        }
+        }*/
     }
 
     @Override

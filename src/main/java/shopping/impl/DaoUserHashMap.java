@@ -33,6 +33,11 @@ public class DaoUserHashMap implements DAO<User>, UserStorage {
     }
 
     @Override
+    public boolean isEmpty() {
+        return storage.isEmpty();
+    }
+
+    @Override
     public void register(String login, String password) {
         cookies.put(login, password);
     }

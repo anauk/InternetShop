@@ -1,4 +1,4 @@
-package servlets;
+package servlets.registration;
 
 
 import javax.servlet.*;
@@ -15,13 +15,13 @@ public class AuthFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        HttpServletRequest hs = (HttpServletRequest) request;
+        /*HttpServletRequest hs = (HttpServletRequest) request;
         if (hs.getMethod().equalsIgnoreCase("POST")
-                && !new Params(hs).containsAll(AuthServlet.f_n, AuthServlet.f_sn, AuthServlet.f_lg, AuthServlet.f_ps)) {
+                && !new Params(hs).containsAll(AuthServlet.name, AuthServlet.surname, AuthServlet.f_lg, AuthServlet.f_ps)) {
             ((HttpServletResponse)response).sendRedirect("/reg");
         } else {
             chain.doFilter(request, response);
-        }
+        }*/
     }
 
     @Override

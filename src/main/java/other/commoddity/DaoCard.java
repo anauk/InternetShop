@@ -40,6 +40,11 @@ public class DaoCard implements DAO<Commodity> {
 
     }
 
+    @Override
+    public boolean isEmpty() {
+        return false;
+    }
+
     public void addToCard(int id, String itemName, int itemPrice, int quantity){
         Commodity item = new Commodity(id, itemName, itemPrice, quantity);
         totalPrice += (itemPrice*quantity);

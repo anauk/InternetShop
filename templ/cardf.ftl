@@ -12,9 +12,10 @@
 <body>
 
 <div action="/auth" method="post" total="">
+    <a href="/logout" >Log out</a>
 
 <div id="header">
-    <h2 class="header">You added good in card</h2>
+    <h2 class="header">You (${name}) added good in card</h2>
 </div>
     <div class="container">
         <div class="flex-container">
@@ -36,17 +37,20 @@
                 <span class="flex-item">${listItem.price}</span>
                 <span class="flex-item">${listItem.quantity}</span>
 
-                    <form class="flex-item" action="/cardOp" method = "post">
-                            <input type="hidden" id="${listItem.id}">
-                            <a href="/cardf" op="sum" type="submit">ADD</a>
+                    <form class="flex-item" <#--action="/cardOp"--> action="/cardf" method = "post">
+                            <input type="hidden" value="${listItem.id}" name="id">
+                        <input type="hidden" value="sum" name="action">
+                            <button <#--op="sum"--> type="submit">ADD</button>
                         </form>
-                    <form class="flex-item" action="/cardOp" method = "post">
-                        <input type="hidden" id="${listItem.id}" >
-                        <a href="/cardf" op="sub" type="submit" >SUB</a>
+                    <form class="flex-item" <#--action="/cardOp"-->action="/cardf" method = "post">
+                        <input type="hidden" value="${listItem.id}" name="id">
+                        <input type="hidden" value="sub" name="action">
+                        <button type="submit" >SUB</button>
                     </form>
-                    <form class="flex-item" action="/cardOp" method = "post">
-                        <input type="hidden" id="${listItem.id}">
-                        <a href="cardf" op="delete">DELETE</a>
+                    <form class="flex-item" <#--action="/cardOp"-->action="/cardf" method = "post">
+                        <input type="hidden" value="${listItem.id}" name="id">
+                        <input type="hidden" value="delete" name="action">
+                        <button<#-- href="cardf"-->>DELETE</button>
                     </form>
             </div>
 
@@ -54,14 +58,15 @@
 
     </div>
     <div class="flex-container">
-<div class="flex-item1 shopping"><a href="/listauth">Continue shopping</a></div>
-<div class="flex-item1" name="total"><Total:<span>$</span>
-<div class="flex-item1">
+<span class="flex-item1 shopping"><a href="/listauth">Continue shopping</a></span>
+        <span class="flex-item1">Total:</span><span>${summ}</span>
+        <span class="flex-item1">${qntSum}</span>
+<span class="flex-item1">
     <form action="" method="get">
         <button class="color-button" type="submit">CHECKOUT</button>
     </form>
-</div>
-</div>
+</span>
+</span>
 </div>
 </div>
 

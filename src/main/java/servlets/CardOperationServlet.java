@@ -2,9 +2,8 @@ package servlets;
 
 import freemarker.FreemarkerCard;
 import shopping.dao.UserStorage;
-import shopping.entity.CartInfo;
 import shopping.sql.DaoCartItemSQL;
-import shopping.sql.DaoCommoditySQL;
+import utils.ParameterFromRequest;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,7 +13,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.Connection;
-import java.util.Collection;
 
 public class CardOperationServlet extends HttpServlet {
     private final UserStorage security;

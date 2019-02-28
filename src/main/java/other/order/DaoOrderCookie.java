@@ -26,4 +26,9 @@ public class DaoOrderCookie implements DAO<Order> {
     public void delete(int id) {
 
     }
+
+    @Override
+    public boolean isEmpty() {
+        return false;
+    }
 }

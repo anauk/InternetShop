@@ -76,4 +76,9 @@ public class DaoCommoditySQL implements DAO<Commodity> {
             throw new IllegalArgumentException("Commodity was not delete", e);
         }
     }
+
+    @Override
+    public boolean isEmpty() {
+        return false;
+    }
 }

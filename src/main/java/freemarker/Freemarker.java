@@ -27,13 +27,18 @@ public class Freemarker {
 
         }};
     }
+
+    public Freemarker() {
+        this("./templ");
+    }
+
     public void render(final String templateFile, final HttpServletResponse resp) throws IOException {
         render(templateFile, new HashMap<>(), resp);
     }
-    public void render(final String templateFile, final HashMap<String, Object> products, final HttpServletResponse resp) throws IOException {
+    public void render(final String templateFile, final HashMap<String, Object> data, final HttpServletResponse resp) throws IOException {
         try {
             resp.setCharacterEncoding(String.valueOf(StandardCharsets.UTF_8));
-            config.getTemplate(templateFile).process(products, resp.getWriter());
+            config.getTemplate(templateFile).process(data, resp.getWriter());
         } catch (TemplateException e) {
             throw new IllegalArgumentException("smth went wrong", e);
         }

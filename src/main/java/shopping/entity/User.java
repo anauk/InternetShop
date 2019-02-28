@@ -23,6 +23,7 @@ public class User {
         this.surname = surname;
         this.login = login;
         this.password = password;
+        this.id = login.hashCode();
     }
     public User(int id, String name, String surname, String login, String password) {
         this(id,name);
@@ -86,5 +87,7 @@ public class User {
                 '}';
     }
 
-
+    public boolean check(String password) {
+        return password.equals(this.password);
+    }
 }
